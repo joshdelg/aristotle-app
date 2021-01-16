@@ -3,7 +3,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 
 function Navbar() {
     return (
-        <Flex bgGradient="linear(to-l, #7928CA, #FF0080)" justify="space-between">
+        <Flex bgGradient="linear(to-l, #7928CA, #FF0080)" justify="space-between" h="100%">
             <Box p="4">
                 <Heading size="xl">Aristotle</Heading>
             </Box>
