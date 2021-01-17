@@ -47,6 +47,12 @@ function Dashboard() {
             if(result.source.droppableId === 'task-list') {
                 dispatch({type: 'SET_TIMED_TASK', task: tasks[result.source.index]});
                 dispatch({type: 'REMOVE_FROM_TASK_LIST', id: tasks[result.source.index].id})
+            } else if(result.source.droppableId.startsWith('s')) {
+                let schedId = parseInt(result.source.droppableId.split('-')[1]);
+                dispatch({type: 'SET_TIMED_TASK', task: schedule[schedId].schedTasks[result.source.index]});
+
+                let newTasks = schedule[schedId].schedTasks.filter((task) => task.id !== schedule[schedId].schedTasks[result.source.index].id);
+                dispatch({type: 'REMOVE_FROM_SCHED', schedId, newTasks});
             }
         }
     }

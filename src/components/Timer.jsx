@@ -11,10 +11,12 @@ function Timer() {
     const [isActive, setIsActive] = useState(false);
 
     const toggle = () => {
+        if(!state.activeTask.estTime) return;
         setIsActive(!isActive);
     }
 
     const reset = () => {
+        if(!state.activeTask.estTime) return;
         dispatch({type: 'ADD_TASK', task: state.activeTask});
         dispatch({type: 'REMOVE_ACTIVE_TASK'})
         setSeconds(0);
@@ -22,6 +24,7 @@ function Timer() {
     }
 
     const complete = () => {
+        if(!state.activeTask.estTime) return;
         setIsActive(false);
         //const completetionTime = seconds;
         setSeconds(0);
@@ -58,9 +61,9 @@ function Timer() {
                         </Box>
                     </Box>
                     <Box my={2}>
-                        <Button mr={4} onClick={toggle}>{(isActive) ? 'Pause' : 'Start'}</Button>
-                        <Button mr={4} onClick={complete}>Complete</Button>
-                        <Button onClick={reset}>Reset</Button>
+                        <Button mr={4} colorScheme="pink" onClick={toggle}>{(isActive) ? 'Pause' : 'Start'}</Button>
+                        <Button mr={4} colorScheme="pink" onClick={complete}>Complete</Button>
+                        <Button colorScheme="pink" variant="outline" onClick={reset}>Reset</Button>
                     </Box>
                     {provided.placeholder}
                 </Flex>

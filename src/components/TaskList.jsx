@@ -17,7 +17,7 @@ function TaskList() {
                 <Flex alignItems="center">
                     <Heading size="xl">Tasks</Heading>
                     <Spacer />
-                    <Button onClick={onOpen}>Add Task</Button>
+                    <Button colorScheme="purple" onClick={onOpen}>Add Task</Button>
                 </Flex>
                 <Droppable droppableId="task-list">
                     {(provided) => (

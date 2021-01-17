@@ -40,18 +40,26 @@ const taskReducer = (state, action) => {
             const tasks = state.tasks.filter((task) => task.id !== action.task.id);
 
             return {...state, schedule: sched, tasks};
-
         case 'SCHED_TO_TASK':
             return {...state, tasks: action.newTasks, schedule: action.newSched};
 
         case 'SET_TIMED_TASK':
             return {...state, activeTask: action.task};
+
         case 'REMOVE_ACTIVE_TASK':
             return {...state, activeTask: {}};
+
         case 'COMPLETE_TASK':
             return {...state, activeTask: {}};
+
         case 'REMOVE_FROM_TASK_LIST':
             return {...state, tasks: state.tasks.filter((task) => task.id !== action.id)};
+
+        case 'REMOVE_FROM_SCHED':
+            let newSched = state.schedule;
+            newSched[action.schedId].schedTasks = action.newTasks;
+
+            return {...state, schedule: newSched};
         default:
             throw new Error("Task reducer action type not recognized");
     }
