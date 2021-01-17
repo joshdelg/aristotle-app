@@ -1,16 +1,16 @@
 import { useContext, useState } from "react";
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select } from "@chakra-ui/react";
+import { Button, FormControl, FormHelperText, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from "@chakra-ui/react";
 import { TaskContext } from "../contexts/TaskContext";
 import { v4 as uuidv4 } from 'uuid';
 
 function NewTaskModal(props) {
 
-    const [formData, setFormData] = useState({title: "", priority: 1, dueDate: "", estTime: ""});
+    const [formData, setFormData] = useState({title: "Untitled Task", priority: 1, dueDate: "1/17", estTime: 15});
     const { dispatch } = useContext(TaskContext);
 
     const handleAddClick = () => {
         dispatch({type: 'ADD_TASK', task: {id: uuidv4(), ...formData}});
-        setFormData({title: "", priority: 1, dueDate: "", estTime: ""})
+        setFormData({title: "Unititled Task", priority: 1, dueDate: "1/17", estTime: 15})
         props.onClose();
     };
 
@@ -42,7 +42,14 @@ function NewTaskModal(props) {
 
                     <FormControl my={2} id="estTime" isRequired>
                         <FormLabel>Estimated Time</FormLabel>
-                        <Input type="text" value={formData.estTime} onChange={(e) => setFormData({...formData, estTime: e.target.value})} />
+                        <NumberInput defaultValue={15} min={1} max={999} value={formData.estTime} onChange={(value) => setFormData({...formData, estTime: parseInt(value)})}>
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                        <FormHelperText>Estimated task duration in minutes</FormHelperText>
                     </FormControl>
                 </ModalBody>
 

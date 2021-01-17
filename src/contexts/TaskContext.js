@@ -4,18 +4,33 @@ const initialState = {
     tasks: [
         {
             id: 'bf2654f0-2934-4f5e-bcc6-dedebbf931dd',
-            title: "This is my first task!",
+            title: "Finish DECA Paper",
             priority: 1,
-            dueDate: "1/17",
-            estTime: 30
+            dueDate: "1/24",
+            estTime: 55
         },
         {
             id: '2e3a8e2a-3ca1-489b-bd0f-4c4f43ee4f2a',
-            title: "This is my second task",
+            title: "Read history chapter",
+            priority: 3,
+            dueDate: "1/19",
+            estTime: 30
+        },
+        {
+            id: '7051bb44-77cc-4cbf-bfa0-bc8f65be638a',
+            title: "Practice piano",
             priority: 3,
             dueDate: "1/18",
             estTime: 45
+        },
+        {
+            id: '9503538a-f228-4976-8263-e4a1f54298ae',
+            title: "Finish essay",
+            priority: 2,
+            dueDate: "1/20",
+            estTime: 45
         }
+
     ],
     schedule: [
         {time: "Morning", dropId: 's-0', schedTasks: []},

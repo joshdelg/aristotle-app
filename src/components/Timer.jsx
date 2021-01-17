@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { TaskContext } from "../contexts/TaskContext";
 
@@ -9,6 +9,11 @@ function Timer() {
 
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
+
+    const [isOpen, setIsOpen] = useState(false);
+    const okayRef = useRef();
+
+    const onClose = () => setIsOpen(false);
 
     const toggle = () => {
         if(!state.activeTask.estTime) return;
@@ -25,6 +30,7 @@ function Timer() {
 
     const complete = () => {
         if(!state.activeTask.estTime) return;
+        setIsOpen(true);
         setIsActive(false);
         //const completetionTime = seconds;
         setSeconds(0);
@@ -45,6 +51,7 @@ function Timer() {
     }, [isActive, seconds]);
 
     return (
+        <>
         <Droppable droppableId="timer">
             {(provided) => (
                 <Flex {...provided.droppableProps} ref={provided.innerRef} p={4} h="100%" direction="column" justifyContent="space-between" borderWidth="1px" borderRadius="lg">
@@ -69,6 +76,19 @@ function Timer() {
                 </Flex>
             )}
         </Droppable>
+
+        <AlertDialog isOpen={isOpen} leastDestructiveRef={okayRef} onClose={onClose}>
+            <AlertDialogOverlay>
+                <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">Congratulations!</AlertDialogHeader>
+                    <AlertDialogBody>Congratulations! You have finished your task!</AlertDialogBody>
+                    <AlertDialogFooter>
+                        <Button ref={okayRef} colorScheme="pink" onClick={onClose}>Okay</Button>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialogOverlay>
+        </AlertDialog>
+        </>
     );
 }
 

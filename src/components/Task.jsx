@@ -1,18 +1,18 @@
 import { forwardRef } from "react";
-import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
 
 const Task = forwardRef(({task, ...rest}, ref) => {
     return(
         <Box bg="gray.50" ref={ref} my="4" p="4" boxShadow="base" borderRadius="lg" {...rest}>
             <Flex>
-                <Text>{task.title}</Text>
+                <Heading size="md">{task.title}</Heading>
                 <Spacer />
-                <Text>{task.priority}</Text>
+                <Text>Priority: {task.priority}</Text>
             </Flex>
             <Flex>
-                <Text>{task.dueDate}</Text>
+                <Text>Due: {task.dueDate}</Text>
                 <Spacer />
-                <Text>{task.estTime}</Text>
+                <Text>Est. Time: {task.estTime}</Text>
             </Flex>
         </Box>
     );
