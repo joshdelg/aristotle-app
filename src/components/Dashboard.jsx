@@ -43,6 +43,11 @@ function Dashboard() {
             newTasks.splice(result.destination.index, 0, movedItem);
 
             dispatch({type: 'SCHED_TO_TASK', newSched, newTasks});
+        } else if(result.destination.droppableId === 'timer') {
+            if(result.source.droppableId === 'task-list') {
+                dispatch({type: 'SET_TIMED_TASK', task: tasks[result.source.index]});
+                dispatch({type: 'REMOVE_FROM_TASK_LIST', id: tasks[result.source.index].id})
+            }
         }
     }
 
@@ -50,16 +55,16 @@ function Dashboard() {
         <Box className="dashboard-container">
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <Grid h="92vh" templateRows="repeat(4, 1fr)" templateColumns="repeat(12, 1fr)">
-                    <GridItem p="6" rowSpan={4} colSpan={3} bg="red.500">
+                    <GridItem p="2" rowSpan={4} colSpan={3}>
                         <TaskList />
                     </GridItem>
-                    <GridItem p="6" rowSpan={4} colSpan={3} bg="tomato">
+                    <GridItem p="2" rowSpan={4} colSpan={3}>
                         <Schedule />
                     </GridItem>
-                    <GridItem p="6" rowSpan={1} colSpan={6} bg="papayawhip">
+                    <GridItem p="2" rowSpan={1} colSpan={6} textAlign="center">
                         <Timer />
                     </GridItem>
-                    <GridItem p="6" rowSpan={3} colSpan={6} bg="teal.200">
+                    <GridItem p="2" rowSpan={3} colSpan={6}>
                         <UnityWrapper />
                     </GridItem>
                 </Grid>

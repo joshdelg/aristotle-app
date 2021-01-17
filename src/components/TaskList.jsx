@@ -1,21 +1,21 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TaskContext } from "../contexts/TaskContext";
 import { Box, Button, Flex, Heading, Spacer, useDisclosure } from "@chakra-ui/react";
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import Task from "./Task";
 import NewTaskModal from "./NewTaskModal";
 
 function TaskList() {
 
-    const { state, dispatch } = useContext(TaskContext);
+    const { state } = useContext(TaskContext);
     const { tasks } = state;
     const { isOpen, onOpen, onClose} = useDisclosure();
 
     return (
         <>
-            <Box h="100%" bg="green.50">
+            <Box p={4} h="100%" borderWidth="1px" borderRadius="lg">
                 <Flex alignItems="center">
-                    <Heading size="xl">Task List!</Heading>
+                    <Heading size="xl">Tasks</Heading>
                     <Spacer />
                     <Button onClick={onOpen}>Add Task</Button>
                 </Flex>
