@@ -7,21 +7,9 @@ import NewTaskModal from "./NewTaskModal";
 
 function TaskList() {
 
-    const { tasks, dispatch } = useContext(TaskContext);
+    const { state, dispatch } = useContext(TaskContext);
+    const { tasks } = state;
     const { isOpen, onOpen, onClose} = useDisclosure();
-
-    const handleOnDragEnd = (result) => {
-        console.log(result);
-
-        if(!result.destination) {
-            return;
-        }
-
-        const items = Array.from(tasks);
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-        dispatch({type: 'REORDER_TASKS', newTasks: items})
-    }
 
     return (
         <>
@@ -31,22 +19,20 @@ function TaskList() {
                     <Spacer />
                     <Button onClick={onOpen}>Add Task</Button>
                 </Flex>
-                <DragDropContext onDragEnd={handleOnDragEnd}>
-                    <Droppable droppableId="task-list">
-                        {(provided) => (
-                            <Box className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
-                            {tasks.map((task, index) => (
-                                <Draggable key={task.id} draggableId={task.id} index={index}>
-                                    {(provided) => (
-                                        <Task task={task} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} />
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                            </Box>
-                        )}
-                    </Droppable>
-                </DragDropContext>
+                <Droppable droppableId="task-list">
+                    {(provided) => (
+                        <Box minH="300px" className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
+                        {tasks.map((task, index) => (
+                            <Draggable key={task.id} draggableId={task.id} index={index}>
+                                {(provided) => (
+                                    <Task task={task} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} />
+                                )}
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                        </Box>
+                    )}
+                </Droppable>
             </Box>
 
             <NewTaskModal isOpen={isOpen} onClose={onClose}/>
