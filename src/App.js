@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Navbar style={{height: "8vh"}} />
-      <Dashboard/>
+      <Dashboard />
     </div>
   );
 }
