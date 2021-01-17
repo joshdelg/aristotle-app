@@ -1,4 +1,3 @@
-import { Heading } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 
