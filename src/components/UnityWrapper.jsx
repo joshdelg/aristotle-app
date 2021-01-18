@@ -4,16 +4,16 @@ import Unity, { UnityContext } from "react-unity-webgl";
 function UnityWrapper() {
 
     let unityContext = new UnityContext({
-        loaderUrl: "./unity/Build/AristotleBuild.loader.js",
-        dataUrl: "./unity/Build/AristotleBuild.data.br",
-        frameworkUrl: "./unity/Build/AristotleBuild.framework.js.br",
-        codeUrl: "./unity/Build/AristotleBuild.wasm.br"
+        loaderUrl: "./unity/Build/aristotle2.loader.js",
+        dataUrl: "./unity/Build/aristotle2.data",
+        frameworkUrl: "./unity/Build/aristotle2.framework.js",
+        codeUrl: "./unity/Build/aristotle2.wasm"
     });
 
     return (
         <Box p={4} h="100%" borderWidth="1px" borderRadius="lg" textAlign="center">
-            {/*<Unity unityContext={unityContext} />*/}
-            <iframe width="800px" height="800px" title="hi" src="https://unity-game-proj.herokuapp.com/"></iframe>
+            <Unity unityContext={unityContext} />
+            {/*<iframe width="800px" height="800px" title="hi" src="https://unity-game-proj.herokuapp.com/"></iframe>*/}
         </Box>
     )
 };
